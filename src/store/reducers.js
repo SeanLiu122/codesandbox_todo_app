@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 // Reducers: are pure functions describe how the applications' state changes in response to actions sent to the store.
 //  -> (previousState, action) => nextState
 import {
@@ -46,24 +47,14 @@ function todos(state = [], action) {
   }
 }
 
-function todoApp(state = initialState, action) {
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return {
-        ...state,
-        visibilityFilter: action.filter
-      };
-    case ADD_TODO:
-      return {
-        ...state,
-        todos: todos(state.todos, action)
-      };
-    case TOGGLE_TODO:
-      return {
-        ...state,
-        todos: todos(state.todos, action)
-      };
-    default:
-      return state;
-  }
-}
+export const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+});
+
+// export default function todoApp(state = {}, action) {
+//   return {
+//     visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+//     todos: todos(state.todos, action)
+//   };
+// }
